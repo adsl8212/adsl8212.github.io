@@ -2,20 +2,24 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>彙整: 2016/8 - Jun Wang的廢文集散地</title>
+<title>SQL面試作業紀錄 - Jun Wang的廢文集散地</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="keywords" content="blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jun Wang的廢文集散地">
-<meta property="og:url" content="http://yoursite.com/archives/2016/08/index.html">
+    <meta name="description" content="此為去某家公司所出的面試作業，一開始寫的時候SQL全忘光了，面試時當然被洗臉，特此紀錄一下作業跟當時沒搞懂的部分">
+<meta name="keywords" content="SQL,面試">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL面試作業紀錄">
+<meta property="og:url" content="http://yoursite.com/2019/04/16/SQL面試作業紀錄/index.html">
 <meta property="og:site_name" content="Jun Wang的廢文集散地">
+<meta property="og:description" content="此為去某家公司所出的面試作業，一開始寫的時候SQL全忘光了，面試時當然被洗臉，特此紀錄一下作業跟當時沒搞懂的部分">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-04-15T18:28:18.319Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jun Wang的廢文集散地">
+<meta name="twitter:title" content="SQL面試作業紀錄">
+<meta name="twitter:description" content="此為去某家公司所出的面試作業，一開始寫的時候SQL全忘光了，面試時當然被洗臉，特此紀錄一下作業跟當時沒搞懂的部分">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -90,7 +94,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/Group.svg" alt="Jun Wang的廢文集散地" height="28">
+                <img src="/images/Group.svg" alt="SQL面試作業紀錄" height="28">
             
             </a>
         </div>
@@ -124,45 +128,342 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        八月 2016
-        </h3>
-        <div class="timeline">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
         
-            <article class="media">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-04-15T17:32:44.000Z">2019-04-16</time>
                 
-                <a href="/2016/08/20/Raspberry-Pi建置/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="https://i.imgur.com/XkH1GeT.png" alt="Raspberry Pi建置">
-                    </p>
-                </a>
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2016-08-20T06:17:33.000Z">2016-08-20</time>
-                        <a href="/2016/08/20/Raspberry-Pi建置/" class="has-link-black-ter is-size-6">Raspberry Pi建置</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/學校/">學校</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/求職/">求職</a>
                 </div>
-            </article>
-        
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 分鐘 閱讀文 (大約 944 個字)
+                </span>
+                
+                
+            </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                SQL面試作業紀錄
+            
+        </h1>
+        <div class="content">
+            <p>此為去某家公司所出的面試作業，一開始寫的時候SQL全忘光了，面試時當然被洗臉，特此紀錄一下作業跟當時沒搞懂的部分<br><a id="more"></a> </p>
+<h3 id="第一大題"><a href="#第一大題" class="headerlink" title="第一大題"></a>第一大題</h3><p>給定了兩個table<br><strong>DEPARTMENTS</strong></p>
+<table>
+<thead>
+<tr>
+<th>department_id</th>
+<th>name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>IT</td>
+</tr>
+<tr>
+<td>2</td>
+<td>HR</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Sales</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Marketing</td>
+</tr>
+</tbody>
+</table>
+<p><strong>EMPLOYEES</strong></p>
+<table>
+<thead>
+<tr>
+<th>employee_id</th>
+<th>department_id</th>
+<th>manager_id</th>
+<th>name</th>
+<th>salary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td></td>
+<td>Dale</td>
+<td>100,000</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>Ben</td>
+<td>100,000</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>Aaron</td>
+<td>90,000</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+<td>5</td>
+<td>Phoenix</td>
+<td>250,000</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2</td>
+<td></td>
+<td>Lyot</td>
+<td>200,000</td>
+</tr>
+<tr>
+<td>6</td>
+<td>1</td>
+<td>5</td>
+<td>Joseph</td>
+<td>90,000</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>query employees (name) who have a bigger salary than their manager<br>找到比老闆薪水高的職員名字</p>
+<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">SELECT</span> e.name <span class="hljs-keyword">AS</span> <span class="hljs-string">'Employee Name'</span>, e2.name <span class="hljs-keyword">AS</span> <span class="hljs-string">'Manager Name'</span>, </span><br><span class="line">e.salary <span class="hljs-keyword">AS</span> <span class="hljs-string">'Employee salary'</span>, e2.salary <span class="hljs-keyword">AS</span> <span class="hljs-string">'Manager salary'</span></span><br><span class="line"><span class="hljs-keyword">FROM</span> EMPLOYEES e</span><br><span class="line"><span class="hljs-keyword">JOIN</span> EMPLOYEES e2 <span class="hljs-keyword">ON</span> e.manager_id = e2.employee_id</span><br><span class="line"><span class="hljs-keyword">WHERE</span> e2.salary &lt; e.salary;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>query employees(name) who have the biggest salary in their departments<br>找到在<strong>每個部門</strong>內薪水最高的職員名字</p>
+<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">SELECT</span> e.name <span class="hljs-keyword">AS</span> <span class="hljs-string">'Employee Name'</span></span><br><span class="line"><span class="hljs-keyword">FROM</span> departments d </span><br><span class="line"><span class="hljs-keyword">JOIN</span> employees e <span class="hljs-keyword">ON</span> e.department_id = d.department_id</span><br><span class="line"><span class="hljs-keyword">WHERE</span> e.salary <span class="hljs-keyword">IN</span> (</span><br><span class="line">  <span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">MAX</span>(emax.salary) <span class="hljs-keyword">FROM</span> employees emax </span><br><span class="line">  <span class="hljs-keyword">WHERE</span> emax.department_id = d.department_id</span><br><span class="line">);</span><br><span class="line"><span class="hljs-comment">#使用subquery效能較差的問題，可以不用subquery</span></span><br><span class="line"><span class="hljs-comment">#↓修正的答案</span></span><br><span class="line"><span class="hljs-keyword">SELECT</span> e.name <span class="hljs-keyword">AS</span> <span class="hljs-string">'Employee Name'</span></span><br><span class="line"><span class="hljs-keyword">FROM</span> employees e</span><br><span class="line"><span class="hljs-keyword">JOIN</span> (<span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">Max</span>(salary) <span class="hljs-keyword">as</span> <span class="hljs-string">'max_salary'</span> <span class="hljs-keyword">FROM</span> employees <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> department_id) <span class="hljs-keyword">as</span> e2</span><br><span class="line"><span class="hljs-keyword">ON</span> e.salary = e2.max_salary;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>query employees(name) who don’t have a manager in the same department<br>找到在同個部門內沒有管理者的職員名字</p>
+<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">SELECT</span> e.name <span class="hljs-keyword">AS</span> <span class="hljs-string">'Employee Name'</span>, e2.name <span class="hljs-keyword">AS</span> <span class="hljs-string">'Boss'</span>, d.name <span class="hljs-keyword">AS</span> <span class="hljs-string">"Employee's Department"</span>, d2.name <span class="hljs-keyword">AS</span> <span class="hljs-string">"Boss' Department"</span></span><br><span class="line"><span class="hljs-keyword">FROM</span> employees e</span><br><span class="line"><span class="hljs-keyword">JOIN</span> employees e2 <span class="hljs-keyword">ON</span> e.manager_id = e2.employee_id</span><br><span class="line"><span class="hljs-keyword">JOIN</span> departments d <span class="hljs-keyword">ON</span> e.department_id = d.department_id</span><br><span class="line"><span class="hljs-keyword">JOIN</span> departments d2 <span class="hljs-keyword">ON</span> e2.department_id = d2.department_id</span><br><span class="line"><span class="hljs-keyword">WHERE</span> e.manager_id != <span class="hljs-number">0</span> <span class="hljs-keyword">AND</span> d.department_id != d2.department_id</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>query the third highest salary of employees<br>找到薪水第三高的職員</p>
+<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">MIN</span>(e.salary)</span><br><span class="line"><span class="hljs-keyword">FROM</span> EMPLOYEES e</span><br><span class="line"><span class="hljs-keyword">JOIN</span> (<span class="hljs-keyword">SELECT</span> employee_id,salary <span class="hljs-keyword">FROM</span> EMPLOYEES <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> salary <span class="hljs-keyword">DESC</span> <span class="hljs-keyword">LIMIT</span> <span class="hljs-number">3</span>) <span class="hljs-keyword">AS</span> e2 <span class="hljs-keyword">ON</span> e.employee_id=e2.employee_id;</span><br><span class="line"><span class="hljs-comment">#這裡只找出第三高的薪水而已</span></span><br><span class="line"><span class="hljs-comment">#↓修正的答案</span></span><br><span class="line"><span class="hljs-keyword">SELECT</span> *</span><br><span class="line"><span class="hljs-keyword">FROM</span> employees</span><br><span class="line"><span class="hljs-keyword">JOIN</span>(<span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">MIN</span>(e.salary) <span class="hljs-keyword">as</span> <span class="hljs-string">'min_salary'</span> <span class="hljs-keyword">FROM</span></span><br><span class="line">(<span class="hljs-keyword">SELECT</span> salary <span class="hljs-keyword">from</span> employees <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> salary <span class="hljs-keyword">DESC</span> <span class="hljs-keyword">LIMIT</span> <span class="hljs-number">3</span>) <span class="hljs-keyword">as</span> e) <span class="hljs-keyword">as</span> e2</span><br><span class="line"><span class="hljs-keyword">ON</span> salary=e2.min_salary;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h3 id="第二大題"><a href="#第二大題" class="headerlink" title="第二大題"></a>第二大題</h3><p><strong>datas</strong></p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>userID</th>
+<th>Date</th>
+<th>count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>001</td>
+<td>2017-01-01</td>
+<td>11</td>
+</tr>
+<tr>
+<td>2</td>
+<td>001</td>
+<td>2017-01-02</td>
+<td>108</td>
+</tr>
+<tr>
+<td>3</td>
+<td>001</td>
+<td>2017-01-03</td>
+<td>151</td>
+</tr>
+<tr>
+<td>4</td>
+<td>001</td>
+<td>2017-01-04</td>
+<td>97</td>
+</tr>
+<tr>
+<td>5</td>
+<td>001</td>
+<td>2017-01-05</td>
+<td>144</td>
+</tr>
+<tr>
+<td>6</td>
+<td>001</td>
+<td>2017-01-06</td>
+<td>1450</td>
+</tr>
+<tr>
+<td>7</td>
+<td>001</td>
+<td>2017-01-07</td>
+<td>198</td>
+</tr>
+<tr>
+<td>8</td>
+<td>001</td>
+<td>2017-01-08</td>
+<td>187</td>
+</tr>
+<tr>
+<td>9</td>
+<td>001</td>
+<td>2017-01-09</td>
+<td>134</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>Write a query to display the records which have 3 or more consecutive days and the count more than 100(inclusive)<br>query哪些天 連續三天的計數次數超過100</p>
+<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">select</span> d1.*</span><br><span class="line"><span class="hljs-keyword">from</span> DATAS d1, DATAS d2, DATAS d3</span><br><span class="line"><span class="hljs-keyword">where</span> d1.count &gt;= <span class="hljs-number">100</span></span><br><span class="line"><span class="hljs-keyword">and</span>   ((d1.id = d2.id + <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> d1.id = d3.id - <span class="hljs-number">1</span>) <span class="hljs-comment">#324</span></span><br><span class="line">    <span class="hljs-keyword">or</span> (d1.id = d2.id + <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> d1.id = d3.id + <span class="hljs-number">2</span>) <span class="hljs-comment">#234</span></span><br><span class="line">    <span class="hljs-keyword">or</span> (d1.id = d2.id - <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> d1.id = d3.id - <span class="hljs-number">2</span>)) <span class="hljs-comment">#432</span></span><br><span class="line"><span class="hljs-keyword">and</span> d2.count &gt;= <span class="hljs-number">100</span></span><br><span class="line"><span class="hljs-keyword">and</span> d3.count &gt;= <span class="hljs-number">100</span></span><br><span class="line"><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> d1.id</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#有表格資料太大的缺點 N^3</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>承上題，想針對”<strong>每個使用者的連續計數次數超過100的天數</strong>”做資料分析。首先，必須把使用者的連續超過次數天數儲存下來：以上面的資料為例：<br>userID: 001, Date: 2017-01-02 ~ 201701-03, continuous day: 2<br>userID: 001, Date: 2017-01-05 ~ 201701-09, continuous day: 5<br>請設計一套流程以及資料庫結構，每天結束後即產生”使用者的連續天數”並儲存下來。</p>
+</li>
+</ul>
+<div style="background-color:#f2f2f2;  border-radius: 10px; padding:10px;">這題想要知道的是如果我”每天”都要把連續天數儲存下來，應該怎麼存<br>先從表格欄位討論，應該有的如下<br>1. ID<br>2. userID<br>3. start_date<br>4. end_date<br>5. continuous day<br><br>我們假設今天就是第一筆資料</div>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>userID</th>
+<th>start_date</th>
+<th>end_date</th>
+<th>continuous_day</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>001</td>
+<td>2019-04-16</td>
+<td>2019-04-16</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<div style="background-color:#f2f2f2;  border-radius: 10px; padding:10px;">假設今天有超過100我們將今天存下來，<code>continuous_day</code> +1<br>到了隔天，我們查看同個使用者的cout，假設4/17 <code>count</code>為135<br>那麼我們去檢查4/17的前一天有沒有<code>end_date</code> 的資料，若有，我們將那筆資料的<code>end_date</code>更新為4/17，並將<code>continuous_day</code> 值+1 ，我們就可以得到以下表格</div>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>userID</th>
+<th>start_date</th>
+<th>end_date</th>
+<th>continuous_day</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>001</td>
+<td>2019-04-16</td>
+<td>2019-04-17</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<div style="background-color:#f2f2f2;  border-radius: 10px; padding:10px;">接下來4/18以此類推，到了4/19，假設這天001的<code>count</code>並沒有超過100，我們就直接略過。<br>到了4/20，又超過100了，但是4/20的前一天4/19並沒有在<code>end_date</code> 裡面，因此我們就直接新增一筆資料</div>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>userID</th>
+<th>start_date</th>
+<th>end_date</th>
+<th>continuous_day</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>001</td>
+<td>2019-04-16</td>
+<td>2019-04-18</td>
+<td>3</td>
+</tr>
+<tr>
+<td>2</td>
+<td>001</td>
+<td>2019-04-20</td>
+<td>2019-04-20</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>這樣就完成了整個資料流程了</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/SQL/">SQL</a>, <a class="has-link-grey -link" href="/tags/面試/">面試</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
     </div>
 </div>
 
 
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2016/08/20/Raspberry-Pi建置/">
+                <span class="level-item">Raspberry Pi建置</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">評論</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2019/04/16/SQL面試作業紀錄/';
+        this.page.identifier = '2019/04/16/SQL面試作業紀錄/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'adsl8212' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
 </div>
                 
 
@@ -617,7 +918,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/Group.svg" alt="Jun Wang的廢文集散地" height="28">
+                    <img src="/images/Group.svg" alt="SQL面試作業紀錄" height="28">
                 
                 </a>
                 <p class="is-size-7">
