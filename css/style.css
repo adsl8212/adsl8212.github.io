@@ -126,6 +126,7 @@ img.thumbnail {
 }
 .footer {
   background: #fff;
+  padding-bottom: 2rem;
 }
 .footer .field .button {
   background: transparent;
@@ -205,6 +206,7 @@ img.thumbnail {
   max-width: 50%;
   font-size: 1.15rem;
   position: relative;
+  letter-spacing: 0.08rem;
 }
 .rtl {
   direction: rtl;
@@ -334,7 +336,7 @@ img.thumbnail {
   color: #7a7a7a !important;
 }
 .has-link-black-ter {
-  color: #242424 !important;
+  color: #4a648c !important;
 }
 @media screen and (max-width: 768px) {
   .has-text-centered-mobile {
