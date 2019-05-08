@@ -15,12 +15,12 @@
 <meta property="og:site_name" content="Jun&#39;s Blog">
 <meta property="og:description" content="因為偶然看到一個免費的課程，又可以免費試用看看GCP，因此紀錄下學習過程。本篇紀錄在 Google 的 Qwiklabs 平台，完成「BigQuery For Data Analysis」這個 quest 的學習內容，其中包括了基本SQL在BigQuery 和 Cloud SQL中的使用、如何將數據載入Cloud SQL中，如何使用BigQuery、Cloud SQL進行query等。">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="http://yoursite.com/cloud.png">
-<meta property="og:updated_time" content="2019-05-08T16:14:58.655Z">
+<meta property="og:image" content="http://yoursite.com/thumb/cloud.png">
+<meta property="og:updated_time" content="2019-05-08T16:30:02.634Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用GCP BigQuery進行基本操作">
 <meta name="twitter:description" content="因為偶然看到一個免費的課程，又可以免費試用看看GCP，因此紀錄下學習過程。本篇紀錄在 Google 的 Qwiklabs 平台，完成「BigQuery For Data Analysis」這個 quest 的學習內容，其中包括了基本SQL在BigQuery 和 Cloud SQL中的使用、如何將數據載入Cloud SQL中，如何使用BigQuery、Cloud SQL進行query等。">
-<meta name="twitter:image" content="http://yoursite.com/cloud.png">
+<meta name="twitter:image" content="http://yoursite.com/thumb/cloud.png">
 
 
 
@@ -141,7 +141,7 @@
     
     <div class="card-image">
         <span class="image is-7by1">
-            <img class="thumbnail" src="/cloud.png" alt="使用GCP BigQuery進行基本操作">
+            <img class="thumbnail" src="/./thumb/cloud.png" alt="使用GCP BigQuery進行基本操作">
         </span>
     </div>
     
@@ -158,7 +158,7 @@
                 <time class="level-item has-text-grey" datetime="2019-05-08T13:32:44.000Z">2019-05-08</time>
                 
                 <i class="far fa-calendar-check">&nbsp</i>
-                <time class="level-item has-text-grey" datetime="2019-05-08T16:14:58.655Z">2019-05-09</time>
+                <time class="level-item has-text-grey" datetime="2019-05-08T16:30:02.634Z">2019-05-09</time>
                 
                 
                 <div class="level-item">
@@ -201,48 +201,48 @@
 <h2 id="開始lab，登入GCP-Console"><a href="#開始lab，登入GCP-Console" class="headerlink" title="開始lab，登入GCP Console"></a>開始lab，登入GCP Console</h2><hr>
 <p>因為參加了<a href="https://events.withgoogle.com/ml-study-jam-basic-tw/#content" target="_blank" rel="noopener">ML Study Jam</a>的活動，提供了Qwiklabs一個月的免費額度</p>
 <ol>
-<li>點擊右上方的Start Lab開始<br><img src="/使用GCP BigQuery進行資料分析/0508GCP1_1.png" alt="開始"><br>記得要選擇一段不被打擾的時間進行，因為Qwiklabs是產生一組暫時的google帳號密碼讓你登入google cloud，因此開始的計時就是此暫時帳號可以使用的時間。<br><br></li>
-<li><p>接著會出現此畫面，因為是使用Qwiklabs提供的一個月免費額度，因此這裡點選<code>Use Subscription</code><br><img src="/使用GCP BigQuery進行資料分析/0508GCP1_2.png" alt></p>
+<li>點擊右上方的Start Lab開始<br><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_1.png" alt="開始"><br>記得要選擇一段不被打擾的時間進行，因為Qwiklabs是產生一組暫時的google帳號密碼讓你登入google cloud，因此開始的計時就是此暫時帳號可以使用的時間。<br><br></li>
+<li><p>接著會出現此畫面，因為是使用Qwiklabs提供的一個月免費額度，因此這裡點選<code>Use Subscription</code><br><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_2.png" alt></p>
 </li>
-<li><p>畫面左邊就會產生一組暫時的GCP帳號，複製帳號密碼，使用無痕打開<a href="https://console.cloud.google.com/" target="_blank" rel="noopener">GCP Console</a><br> <img src="/使用GCP BigQuery進行資料分析/0508GCP1_3.png" alt></p>
+<li><p>畫面左邊就會產生一組暫時的GCP帳號，複製帳號密碼，使用無痕打開<a href="https://console.cloud.google.com/" target="_blank" rel="noopener">GCP Console</a><br> <img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_3.png" alt></p>
  <div style="background-color:#fff3cd;  border-radius: 10px; padding:12px 20px; color: #856404; border-color: #ffeeba;">這裡因為通常大家都會登入自己的google帳號，如果使用原本瀏覽器的話，可能會跳到自己的帳號產生衝突，因此建議使用無痕模式進行實作哦~</div></li>
-<li>成功登入後就可以開始使用GCP囉~<br><img src="/使用GCP BigQuery進行資料分析/0508GCP1_4.png" alt></li>
+<li>成功登入後就可以開始使用GCP囉~<br><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_4.png" alt></li>
 </ol>
 <h2 id="開啟Google-Cloud-Shell"><a href="#開啟Google-Cloud-Shell" class="headerlink" title="開啟Google Cloud Shell"></a>開啟Google Cloud Shell</h2><hr>
 <ol>
 <li>在GCP主頁面的右上方工具列點擊<code>Activate Cloud Shell</code></li>
 </ol>
-<p><img src="/使用GCP BigQuery進行資料分析/0508GCP1_5.png" alt></p>
+<p><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_5.png" alt></p>
 <div style="background-color:#fff3cd;  border-radius: 10px; padding:12px 20px; color: #856404; border-color: #ffeeba;">注意左邊project有沒有選到qwiklabs的暫時帳號的project</div>
 
 <ol start="2">
 <li>打開後於彈出視窗點擊<code>START CLOUD SHELL</code></li>
 </ol>
-<p><img src="/使用GCP BigQuery進行資料分析/0508GCP1_6.png" alt></p>
+<p><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_6.png" alt></p>
 <ol start="3">
 <li>連結成功後代表驗證成功羅~</li>
 </ol>
-<p><img src="/使用GCP BigQuery進行資料分析/0508GCP1_7.png" alt></p>
+<p><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_7.png" alt></p>
 <h2 id="使用BigQuery進行查詢"><a href="#使用BigQuery進行查詢" class="headerlink" title="使用BigQuery進行查詢"></a>使用BigQuery進行查詢</h2><hr>
 <h3 id="載入公開資料集"><a href="#載入公開資料集" class="headerlink" title="載入公開資料集"></a>載入公開資料集</h3><ol>
-<li>首先我們點開左邊工具欄進入BigQuery頁面<br><img src="/使用GCP BigQuery進行資料分析/0508GCP1_8.png" alt></li>
+<li>首先我們點開左邊工具欄進入BigQuery頁面<br><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_8.png" alt></li>
 <li>接著我們要載入資料集來進行練習，點擊左邊的<strong>ADD DATA &gt; Explore public datasets</strong></li>
 </ol>
-<p><img src="/使用GCP BigQuery進行資料分析/0508GCP1_9.png" alt><br>在搜尋欗輸入<code>london bicycle hires</code>，點擊搜尋結果並<strong>View Dataset</strong></p>
-<p><img src="/使用GCP BigQuery進行資料分析/0508GCP1_10.png" alt><br>會開啟一個新的視窗，在左方會看到一個新的project <code>bigquery-public-data</code>點擊此專案<strong>bigquery-public-data &gt; london_bicycles &gt; cycle_hire</strong>這是一個倫敦的腳踏車租借資料集</p>
-<p><img src="/使用GCP BigQuery進行資料分析/0508GCP1_11.png" alt><br>這樣就載入完成了</p>
+<p><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_9.png" alt><br>在搜尋欗輸入<code>london bicycle hires</code>，點擊搜尋結果並<strong>View Dataset</strong></p>
+<p><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_10.png" alt><br>會開啟一個新的視窗，在左方會看到一個新的project <code>bigquery-public-data</code>點擊此專案<strong>bigquery-public-data &gt; london_bicycles &gt; cycle_hire</strong>這是一個倫敦的腳踏車租借資料集</p>
+<p><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_11.png" alt><br>這樣就載入完成了</p>
 <hr>
 <h3 id="使用SQL進行query"><a href="#使用SQL進行query" class="headerlink" title="使用SQL進行query"></a>使用SQL進行query</h3><p>這是一個2015年至2017年期間在倫敦的腳踏車租借資料，大約有24,369,201筆（無論如何都不是少量！）<br>這邊就是先使用SQL基礎的<code>SELECT</code>、<code>FROM</code>、<code>WHERE</code>等指令進行查詢</p>
 <ol>
 <li>在Query editor中輸入以下指令並點擊 RUN<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">SELECT</span> end_station_name <span class="hljs-keyword">FROM</span> <span class="hljs-string">`bigquery-public-data.london_bicycles.cycle_hire`</span>;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p><img src="/使用GCP BigQuery進行資料分析/0508GCP1_12.png" alt><br>我們可以看到query結果顯示在下方</p>
+<p><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_12.png" alt><br>我們可以看到query結果顯示在下方</p>
 <ol start="2">
 <li>接著我們再嘗試其他指令，我們試著找出租借時間大於20分鐘的資料，一樣在Query editor中輸入以下指令<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> <span class="hljs-string">`bigquery-public-data.london_bicycles.cycle_hire`</span> <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">duration</span>&gt;=<span class="hljs-number">1200</span>;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p><img src="/使用GCP BigQuery進行資料分析/0508GCP1_13.png" alt><br>看到右下角，則會看到返回了7,334,890筆資料。 作為總數的一小部分（7334890/24369201），這意味著大約30％的倫敦腳踏車租借都持續了20分鐘或更長時間。也可以看到執行時間大概30秒，執行速度真的很快R。</p>
+<p><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_13.png" alt><br>看到右下角，則會看到返回了7,334,890筆資料。 作為總數的一小部分（7334890/24369201），這意味著大約30％的倫敦腳踏車租借都持續了20分鐘或更長時間。也可以看到執行時間大概30秒，執行速度真的很快R。</p>
 <p>還有其他的指令如<code>ORDER BY</code>、<code>COUNT</code>等等都是相同的做法。</p>
 <h2 id="使用Cloud-SQL進行查詢"><a href="#使用Cloud-SQL進行查詢" class="headerlink" title="使用Cloud SQL進行查詢"></a>使用Cloud SQL進行查詢</h2><hr>
 <h3 id="建立雲端儲存庫"><a href="#建立雲端儲存庫" class="headerlink" title="建立雲端儲存庫"></a>建立雲端儲存庫</h3><ol>
@@ -251,20 +251,20 @@
 <figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">SELECT</span> start_station_name, <span class="hljs-keyword">COUNT</span>(*) <span class="hljs-keyword">AS</span> <span class="hljs-keyword">num</span> <span class="hljs-keyword">FROM</span> <span class="hljs-string">`bigquery-public-data.london_bicycles.cycle_hire`</span> <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> start_station_name <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">num</span> <span class="hljs-keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
 <figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">SELECT</span> end_station_name, <span class="hljs-keyword">COUNT</span>(*) <span class="hljs-keyword">AS</span> <span class="hljs-keyword">num</span> <span class="hljs-keyword">FROM</span> <span class="hljs-string">`bigquery-public-data.london_bicycles.cycle_hire`</span> <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> end_station_name <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">num</span> <span class="hljs-keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
 <p>在query結果上方選擇<strong>SAVE RESULTS &gt; CSV</strong>，將query結果下載下來</p>
-<p><img src="/使用GCP BigQuery進行資料分析/0508GCP1_14.png" alt></p>
+<p><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_14.png" alt></p>
 <ol start="2">
 <li>接著我們要將這個子集上傳到雲端儲存庫<br>點擊左邊工具列 <strong>Storage &gt; Browser</strong>，點擊<strong>Create bucket</strong>，在欄位中輸入名字其他的欄位不動然後<strong>Create</strong></li>
 </ol>
-<p><img src="/使用GCP BigQuery進行資料分析/0508GCP1_15.png" alt><br>然後就可以在GCP控制台中看到剛剛創建的雲端儲存庫，接著我們要將剛剛兩個生成的子集CSV檔上傳上去，點擊<strong>Upload files</strong>然後選擇剛剛下載的csv檔案，上傳完成後我們將它重新命名為<code>start_station_data.csv</code>以及<code>end_station_data.csv</code></p>
-<p><img src="/使用GCP BigQuery進行資料分析/0508GCP1_16.png" alt><br><img src="/使用GCP BigQuery進行資料分析/0508GCP1_17.png" alt></p>
+<p><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_15.png" alt><br>然後就可以在GCP控制台中看到剛剛創建的雲端儲存庫，接著我們要將剛剛兩個生成的子集CSV檔上傳上去，點擊<strong>Upload files</strong>然後選擇剛剛下載的csv檔案，上傳完成後我們將它重新命名為<code>start_station_data.csv</code>以及<code>end_station_data.csv</code></p>
+<p><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_16.png" alt><br><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_17.png" alt></p>
 <hr>
-<h3 id="建立Cloud-SQL"><a href="#建立Cloud-SQL" class="headerlink" title="建立Cloud SQL"></a>建立Cloud SQL</h3><p>接著建立好雲端儲存庫且放上資料表後我們要利用它來建立SQL實體，選擇左邊工具列<strong>SQL</strong>，點擊<strong>Create Instance</strong>，接著選擇<code>MySQL</code><br><img src="/使用GCP BigQuery進行資料分析/0508GCP1_18.png" alt><br>之後輸入資料庫實體的名稱(像這裡是qwiklabs-demo)、密碼，點選<strong>Create</strong><br><img src="/使用GCP BigQuery進行資料分析/0508GCP1_19.png" alt><br>接著就是等待實體建置完成，需要等待蠻長的時間，建立好了之後可以看到名稱左邊有個綠色勾勾囉，點擊實體名稱就可以進入控制台<br><img src="/使用GCP BigQuery進行資料分析/0508GCP1_20.png" alt></p>
+<h3 id="建立Cloud-SQL"><a href="#建立Cloud-SQL" class="headerlink" title="建立Cloud SQL"></a>建立Cloud SQL</h3><p>接著建立好雲端儲存庫且放上資料表後我們要利用它來建立SQL實體，選擇左邊工具列<strong>SQL</strong>，點擊<strong>Create Instance</strong>，接著選擇<code>MySQL</code><br><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_18.png" alt><br>之後輸入資料庫實體的名稱(像這裡是qwiklabs-demo)、密碼，點選<strong>Create</strong><br><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_19.png" alt><br>接著就是等待實體建置完成，需要等待蠻長的時間，建立好了之後可以看到名稱左邊有個綠色勾勾囉，點擊實體名稱就可以進入控制台<br><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_20.png" alt></p>
 <hr>
 <h3 id="在Cloud-SQL中進行query"><a href="#在Cloud-SQL中進行query" class="headerlink" title="在Cloud SQL中進行query"></a>在Cloud SQL中進行query</h3><ol>
 <li>現在我們已經建立好Cloud SQL實體了，接著我們就可以使用Cloud Shell Command Line來建立一個資料庫<br>在Cloud Shell中執行以下命令，用來連結到我們的SQL實體，qwiklabs-demo為實體名稱<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcloud sql connect  qwiklabs-demo --user=root</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>出現以下結果代表連結成功<br><img src="/使用GCP BigQuery進行資料分析/0508GCP1_21.png" alt><br>接著我們要在我們的資料庫中放入剛剛上傳的兩個資料集，因此我們創建一個名叫<code>bike</code>的資料庫<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE bike;</span><br></pre></td></tr></table></figure></p>
+<p>出現以下結果代表連結成功<br><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_21.png" alt><br>接著我們要在我們的資料庫中放入剛剛上傳的兩個資料集，因此我們創建一個名叫<code>bike</code>的資料庫<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE bike;</span><br></pre></td></tr></table></figure></p>
 <ol start="2">
 <li>接著我們要在資料庫(database)中建立兩個資料表(table)，執行以下指令</li>
 </ol>
@@ -274,15 +274,15 @@
 <li><p>創建好資料表後我們要將剛剛上傳的兩個csv檔連結到創建好的資料表</p>
 <ol>
 <li>打開 Cloud SQL “qwiklabs-demo” 的實體頁面, 點擊<strong>IMPORT</strong></li>
-<li>進入頁面後點擊<strong>Browse</strong>，選擇儲存庫名稱接著選擇我們生成的csv文件<br><img src="/使用GCP BigQuery進行資料分析/0508GCP1_22.png" alt></li>
-<li>在Table欗位分別填入 <code>london1</code> <code>london2</code>，點擊<strong>Import</strong><br><img src="/使用GCP BigQuery進行資料分析/0508GCP1_23.png" alt></li>
+<li>進入頁面後點擊<strong>Browse</strong>，選擇儲存庫名稱接著選擇我們生成的csv文件<br><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_22.png" alt></li>
+<li>在Table欗位分別填入 <code>london1</code> <code>london2</code>，點擊<strong>Import</strong><br><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_23.png" alt></li>
 </ol>
 </li>
 <li><p>現在應該將兩個CSV文件上傳到了資料表中了，我們回到Cloud Shell中並輸入指令</p>
 <figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM london1;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>就可以得到query結果<br><img src="/使用GCP BigQuery進行資料分析/0508GCP1_24.png" alt><br>也就可以執行其他SQL query啦~~</p>
+<p>就可以得到query結果<br><img src="/2019/05/08/使用GCP BigQuery進行資料分析/0508GCP1_24.png" alt><br>也就可以執行其他SQL query啦~~</p>
 <hr>
 <p>以上就是Quest中最基礎的課程，第一次使用GCP時有點手忙腳亂XD，使用Qwiklabs也是一個視窗看教學一個視窗實作還要注意時間，有點忙碌，但整體來說見識到BigQuery的速度。之後應該還會寫一個BigQuery ML的課程紀錄ㄅ</p>
 
