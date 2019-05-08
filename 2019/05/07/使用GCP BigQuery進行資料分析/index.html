@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>使用GCP BigQuery進行基本操作 - Jun&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="因為偶然看到一個免費的課程，又可以免費試用看看GCP，因此紀錄下學習過程。本篇紀錄在 Google 的 Qwiklabs 平台，完成「BigQuery For Data Analysis」這個 quest 的學習內容，其中包括了基本SQL在BigQuery 和 Cloud SQL中的使用、如何將數據載入Cloud SQL中，如何使用BigQuery、Cloud SQL進行query等。">
+<meta name="keywords" content="SQL,GCP,Qwiklab">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用GCP BigQuery進行基本操作">
+<meta property="og:url" content="http://yoursite.com/2019/05/07/使用GCP BigQuery進行資料分析/index.html">
+<meta property="og:site_name" content="Jun&#39;s Blog">
+<meta property="og:description" content="因為偶然看到一個免費的課程，又可以免費試用看看GCP，因此紀錄下學習過程。本篇紀錄在 Google 的 Qwiklabs 平台，完成「BigQuery For Data Analysis」這個 quest 的學習內容，其中包括了基本SQL在BigQuery 和 Cloud SQL中的使用、如何將數據載入Cloud SQL中，如何使用BigQuery、Cloud SQL進行query等。">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="http://yoursite.com/img/cloud.png">
+<meta property="og:updated_time" content="2019-05-08T13:07:21.139Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用GCP BigQuery進行基本操作">
+<meta name="twitter:description" content="因為偶然看到一個免費的課程，又可以免費試用看看GCP，因此紀錄下學習過程。本篇紀錄在 Google 的 Qwiklabs 平台，完成「BigQuery For Data Analysis」這個 quest 的學習內容，其中包括了基本SQL在BigQuery 和 Cloud SQL中的使用、如何將數據載入Cloud SQL中，如何使用BigQuery、Cloud SQL進行query等。">
+<meta name="twitter:image" content="http://yoursite.com/img/cloud.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/rainbow.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- <body class="is-2-column"> -->
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/Group.svg" alt="使用GCP BigQuery進行基本操作" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">首頁</a>
+                
+                <a class="navbar-item" href="/archives">總覽</a>
+                
+                <a class="navbar-item" href="/categories">分類</a>
+                
+                <a class="navbar-item" href="/tags">標籤</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="文章目錄" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜尋" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/img/cloud.png" alt="使用GCP BigQuery進行基本操作">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal" style="color:#4a648c;">
+            
+            <i class="fas fa-pencil-alt">&nbsp&nbsp</i>使用GCP BigQuery進行基本操作
+            
+        </h1>
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <i class="far fa-calendar">&nbsp</i>
+                <time class="level-item has-text-grey" datetime="2019-05-06T17:32:44.000Z">2019-05-07</time>
+                
+                <i class="far fa-calendar-check">&nbsp</i>
+                <time class="level-item has-text-grey" datetime="2019-05-08T13:07:21.139Z">2019-05-08</time>
+                
+                
+                <div class="level-item">
+                <i class="fas fa-tags">&nbsp</i>
+                <a class="has-link-grey -link" href="/categories/GCP/">GCP</a>
+                </div>
+                
+                
+                <i class="fas fa-clock">&nbsp</i>
+                <span class="level-item has-text-grey">
+                    
+                    
+                    13 分鐘 閱讀文 (大約 1904 個字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span> visits
+                </span>
+                
+            </div>
+        </div>
+        
+        <!-- <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                使用GCP BigQuery進行基本操作
+            
+        </h1> -->
+        <div class="content">
+            <p>因為偶然看到一個免費的課程，又可以免費試用看看GCP，因此紀錄下學習過程。<br>本篇紀錄在 Google 的 <a href="https://www.qwiklabs.com/" target="_blank" rel="noopener">Qwiklabs</a> 平台，完成「<a href="https://google.qwiklabs.com/quests/55" target="_blank" rel="noopener">BigQuery For Data Analysis</a>」這個 quest 的學習內容，其中包括了基本SQL在<a href="https://cloud.google.com/bigquery/?hl=zh-tw" target="_blank" rel="noopener">BigQuery</a> 和 Cloud SQL中的使用、如何將數據載入Cloud SQL中，如何使用BigQuery、Cloud SQL進行query等。<br><a id="more"></a> </p>
+<h1 id="BigQuery"><a href="#BigQuery" class="headerlink" title="BigQuery"></a>BigQuery</h1><hr>
+<p>BigQuery是一個PB級資料庫託管服務，可以在Google Cloud Platform上運行。 數據分析師和數據科學家可以快速查詢和過濾大型資料集，匯總結果並執行複雜的操作，不必擔心設置和管理伺服器。 它以命令工具（已預先安裝在cloud shell中）或以Web控制台的形式進行操作。</p>
+<h1 id="Cloud-SQL"><a href="#Cloud-SQL" class="headerlink" title="Cloud SQL"></a>Cloud SQL</h1><hr>
+<p>Cloud SQL也是一個資料庫託管服務，可以輕鬆地在雲端上設置、維護、管理PostgreSQL和MySQL資料庫。 Cloud SQL接受兩種格式的資料</p>
+<ul>
+<li>轉儲文件（.sql）</li>
+<li>CSV文件（.csv）</li>
+</ul>
+<h1 id="開始lab，登入GCP-Console"><a href="#開始lab，登入GCP-Console" class="headerlink" title="開始lab，登入GCP Console"></a>開始lab，登入GCP Console</h1><hr>
+<p>因為參加了<a href="https://events.withgoogle.com/ml-study-jam-basic-tw/#content" target="_blank" rel="noopener">ML Study Jam</a>的活動，提供了Qwiklabs一個月的免費額度</p>
+<ol>
+<li>點擊右上方的Start Lab開始<br><img src="/img/0508GCP1_1.png" alt="開始"><br>記得要選擇一段不被打擾的時間進行，因為Qwiklabs是產生一組暫時的google帳號密碼讓你登入google cloud，因此開始的計時就是此暫時帳號可以使用的時間。<br><br></li>
+<li><p>接著會出現此畫面，因為是使用Qwiklabs提供的一個月免費額度，因此這裡點選<code>Use Subscription</code><br><img src="/img/0508GCP1_2.png" alt></p>
+</li>
+<li><p>畫面左邊就會產生一組暫時的GCP帳號，複製帳號密碼，使用無痕打開<a href="https://console.cloud.google.com/" target="_blank" rel="noopener">GCP Console</a><br> <img src="/img/0508GCP1_3.png" alt></p>
+ <div style="background-color:#fff3cd;  border-radius: 10px; padding:10px 10px; color: #93751c;"><br>這裡因為通常大家都會登入自己的google帳號，如果使用原本瀏覽器的話，可能會跳到自己的帳號產生衝突，因此建議使用無痕模式進行實作哦~</div></li>
+<li>成功登入後就可以開始使用GCP囉~<br><img src="/img/0508GCP1_4.png" alt></li>
+</ol>
+<h1 id="開啟Google-Cloud-Shell"><a href="#開啟Google-Cloud-Shell" class="headerlink" title="開啟Google Cloud Shell"></a>開啟Google Cloud Shell</h1><hr>
+<ol>
+<li>在GCP主頁面的右上方工具列點擊<code>Activate Cloud Shell</code></li>
+</ol>
+<p><img src="/img/0508GCP1_5.png" alt></p>
+<div style="background-color:#fff3cd;  border-radius: 10px; padding:10px; color: #93751c;"><br>注意左邊project有沒有選到qwiklabs的暫時帳號的project</div>
+
+<ol start="2">
+<li>打開後於彈出視窗點擊<code>START CLOUD SHELL</code></li>
+</ol>
+<p><img src="/img/0508GCP1_6.png" alt></p>
+<ol start="3">
+<li>連結成功後代表驗證成功羅~</li>
+</ol>
+<p><img src="/img/0508GCP1_7.png" alt></p>
+<h1 id="使用BigQuery進行查詢"><a href="#使用BigQuery進行查詢" class="headerlink" title="使用BigQuery進行查詢"></a>使用BigQuery進行查詢</h1><hr>
+<h2 id="載入公開資料集"><a href="#載入公開資料集" class="headerlink" title="載入公開資料集"></a>載入公開資料集</h2><ol>
+<li>首先我們點開左邊工具欄進入BigQuery頁面<br><img src="/img/0508GCP1_8.png" alt></li>
+<li>接著我們要載入資料集來進行練習，點擊左邊的<strong>ADD DATA &gt; Explore public datasets</strong></li>
+</ol>
+<p><img src="/img/0508GCP1_9.png" alt><br>在搜尋欗輸入<code>london bicycle hires</code>，點擊搜尋結果並<strong>View Dataset</strong></p>
+<p><img src="/img/0508GCP1_10.png" alt><br>會開啟一個新的視窗，在左方會看到一個新的project <code>bigquery-public-data</code>點擊此專案<strong>bigquery-public-data &gt; london_bicycles &gt; cycle_hire</strong>這是一個倫敦的腳踏車租借資料集</p>
+<p><img src="/img/0508GCP1_11.png" alt><br>這樣就載入完成了</p>
+<hr>
+<h2 id="使用SQL進行query"><a href="#使用SQL進行query" class="headerlink" title="使用SQL進行query"></a>使用SQL進行query</h2><p>這是一個2015年至2017年期間在倫敦的腳踏車租借資料，大約有24,369,201筆（無論如何都不是少量！）<br>這邊就是先使用SQL基礎的<code>SELECT</code>、<code>FROM</code>、<code>WHERE</code>等指令進行查詢</p>
+<ol>
+<li>在Query editor中輸入以下指令並點擊 RUN<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">SELECT</span> end_station_name <span class="hljs-keyword">FROM</span> <span class="hljs-string">`bigquery-public-data.london_bicycles.cycle_hire`</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><img src="/img/0508GCP1_12.png" alt><br>我們可以看到query結果顯示在下方</p>
+<ol start="2">
+<li>接著我們再嘗試其他指令，我們試著找出租借時間大於20分鐘的資料，一樣在Query editor中輸入以下指令<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> <span class="hljs-string">`bigquery-public-data.london_bicycles.cycle_hire`</span> <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">duration</span>&gt;=<span class="hljs-number">1200</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><img src="/img/0508GCP1_13.png" alt><br>看到右下角，則會看到返回了7,334,890筆資料。 作為總數的一小部分（7334890/24369201），這意味著大約30％的倫敦腳踏車租借都持續了20分鐘或更長時間。也可以看到執行時間大概30秒，執行速度真的很快R。</p>
+<p>還有其他的指令如<code>ORDER BY</code>、<code>COUNT</code>等等都是相同的做法。</p>
+<h1 id="使用Cloud-SQL進行查詢"><a href="#使用Cloud-SQL進行查詢" class="headerlink" title="使用Cloud SQL進行查詢"></a>使用Cloud SQL進行查詢</h1><hr>
+<h2 id="建立雲端儲存庫"><a href="#建立雲端儲存庫" class="headerlink" title="建立雲端儲存庫"></a>建立雲端儲存庫</h2><ol>
+<li>我們要將<code>cycle_hire</code>子集導出為CSV文件，並將其上傳到雲端儲存庫。我們使用BigQuery來產生子集</li>
+</ol>
+<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">SELECT</span> start_station_name, <span class="hljs-keyword">COUNT</span>(*) <span class="hljs-keyword">AS</span> <span class="hljs-keyword">num</span> <span class="hljs-keyword">FROM</span> <span class="hljs-string">`bigquery-public-data.london_bicycles.cycle_hire`</span> <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> start_station_name <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">num</span> <span class="hljs-keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">SELECT</span> end_station_name, <span class="hljs-keyword">COUNT</span>(*) <span class="hljs-keyword">AS</span> <span class="hljs-keyword">num</span> <span class="hljs-keyword">FROM</span> <span class="hljs-string">`bigquery-public-data.london_bicycles.cycle_hire`</span> <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> end_station_name <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">num</span> <span class="hljs-keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+<p>在query結果上方選擇<strong>SAVE RESULTS &gt; CSV</strong>，將query結果下載下來</p>
+<p><img src="/img/0508GCP1_14.png" alt></p>
+<ol start="2">
+<li>接著我們要將這個子集上傳到雲端儲存庫<br>點擊左邊工具列 <strong>Storage &gt; Browser</strong>，點擊<strong>Create bucket</strong>，在欄位中輸入名字其他的欄位不動然後<strong>Create</strong></li>
+</ol>
+<p><img src="/img/0508GCP1_15.png" alt><br>然後就可以在GCP控制台中看到剛剛創建的雲端儲存庫，接著我們要將剛剛兩個生成的子集CSV檔上傳上去，點擊<strong>Upload files</strong>然後選擇剛剛下載的csv檔案，上傳完成後我們將它重新命名為<code>start_station_data.csv</code>以及<code>end_station_data.csv</code></p>
+<p><img src="/img/0508GCP1_16.png" alt><br><img src="/img/0508GCP1_17.png" alt></p>
+<hr>
+<h2 id="建立Cloud-SQL"><a href="#建立Cloud-SQL" class="headerlink" title="建立Cloud SQL"></a>建立Cloud SQL</h2><p>接著建立好雲端儲存庫且放上資料表後我們要利用它來建立SQL實體，選擇左邊工具列<strong>SQL</strong>，點擊<strong>Create Instance</strong>，接著選擇<code>MySQL</code><br><img src="/img/0508GCP1_18.png" alt><br>之後輸入資料庫實體的名稱(像這裡是qwiklabs-demo)、密碼，點選<strong>Create</strong><br><img src="/img/0508GCP1_19.png" alt><br>接著就是等待實體建置完成，需要等待蠻長的時間，建立好了之後可以看到名稱左邊有個綠色勾勾囉，點擊實體名稱就可以進入控制台<br><img src="/img/0508GCP1_20.png" alt></p>
+<hr>
+<h2 id="在Cloud-SQL中進行query"><a href="#在Cloud-SQL中進行query" class="headerlink" title="在Cloud SQL中進行query"></a>在Cloud SQL中進行query</h2><ol>
+<li>現在我們已經建立好Cloud SQL實體了，接著我們就可以使用Cloud Shell Command Line來建立一個資料庫<br>在Cloud Shell中執行以下命令，用來連結到我們的SQL實體，qwiklabs-demo為實體名稱<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcloud sql connect  qwiklabs-demo --user=root</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>出現以下結果代表連結成功<br><img src="/img/0508GCP1_21.png" alt><br>接著我們要在我們的資料庫中放入剛剛上傳的兩個資料集，因此我們創建一個名叫<code>bike</code>的資料庫<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE bike;</span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li>接著我們要在資料庫(database)中建立兩個資料表(table)，執行以下指令</li>
+</ol>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE bike;</span><br><span class="line">CREATE TABLE london1 (start_station_name VARCHAR(255), num INT);</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE bike;</span><br><span class="line">CREATE TABLE london2 (end_station_name VARCHAR(255), num INT);</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><p>創建好資料表後我們要將剛剛上傳的兩個csv檔連結到創建好的資料表</p>
+<ol>
+<li>打開 Cloud SQL “qwiklabs-demo” 的實體頁面, 點擊<strong>IMPORT</strong></li>
+<li>進入頁面後點擊<strong>Browse</strong>，選擇儲存庫名稱接著選擇我們生成的csv文件<br><img src="/img/0508GCP1_22.png" alt></li>
+<li>在Table欗位分別填入 <code>london1</code> <code>london2</code>，點擊<strong>Import</strong><br><img src="/img/0508GCP1_23.png" alt></li>
+</ol>
+</li>
+<li><p>現在應該將兩個CSV文件上傳到了資料表中了，我們回到Cloud Shell中並輸入指令</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM london1;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>就可以得到query結果<br><img src="/img/0508GCP1_24.png" alt><br>也就可以執行其他SQL query啦~~</p>
+<hr>
+<p>以上就是Quest中最基礎的課程，第一次使用GCP時有點手忙腳亂XD，使用Qwiklabs也是一個視窗看教學一個視窗實作還要注意時間，有點忙碌，但整體來說見識到BigQuery的速度。之後應該還會寫一個BigQuery ML的課程紀錄ㄅ</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/GCP/">GCP</a>, <a class="has-link-grey -link" href="/tags/Qwiklab/">Qwiklab</a>, <a class="has-link-grey -link" href="/tags/SQL/">SQL</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/04/16/SQL面試作業紀錄/">
+                <span class="level-item">SQL面試作業紀錄</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">評論</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2019/05/07/使用GCP BigQuery進行資料分析/';
+        this.page.identifier = '2019/05/07/使用GCP BigQuery進行資料分析/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'adsl8212' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+    
+    
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image container is-128x128 has-mb-6">
+                            <img class="is-rounded" src="/images/02262.png" alt="June Wang">
+                        </figure>
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        June Wang
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        紀錄學習技術以及發廢文
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Taichung, TW</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分類
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        標籤
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        6
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/adsl8212" target="_blank">
+                追蹤</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/adsl8212">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="CodePen" href="https://codepen.io/brick9450/">
+                
+                <i class="fab fa-codepen"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Medium" href="https://medium.com/adsl8212/">
+                
+                <i class="fab fa-medium"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Email" href="mailto:adsl8212@gmail.com">
+                
+                <i class="fas fa-envelope"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+    
+<!-- <div class="card widget" id="toc"> -->
+<div class="card widget column-left is-sticky" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                文章目錄
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#BigQuery">
+        <span class="has-mr-6">1</span>
+        <span>BigQuery</span>
+        </a></li><li>
+        <a class="is-flex" href="#Cloud-SQL">
+        <span class="has-mr-6">2</span>
+        <span>Cloud SQL</span>
+        </a></li><li>
+        <a class="is-flex" href="#開始lab，登入GCP-Console">
+        <span class="has-mr-6">3</span>
+        <span>開始lab，登入GCP Console</span>
+        </a></li><li>
+        <a class="is-flex" href="#開啟Google-Cloud-Shell">
+        <span class="has-mr-6">4</span>
+        <span>開啟Google Cloud Shell</span>
+        </a></li><li>
+        <a class="is-flex" href="#使用BigQuery進行查詢">
+        <span class="has-mr-6">5</span>
+        <span>使用BigQuery進行查詢</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#載入公開資料集">
+        <span class="has-mr-6">5.1</span>
+        <span>載入公開資料集</span>
+        </a></li><li>
+        <a class="is-flex" href="#使用SQL進行query">
+        <span class="has-mr-6">5.2</span>
+        <span>使用SQL進行query</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#使用Cloud-SQL進行查詢">
+        <span class="has-mr-6">6</span>
+        <span>使用Cloud SQL進行查詢</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#建立雲端儲存庫">
+        <span class="has-mr-6">6.1</span>
+        <span>建立雲端儲存庫</span>
+        </a></li><li>
+        <a class="is-flex" href="#建立Cloud-SQL">
+        <span class="has-mr-6">6.2</span>
+        <span>建立Cloud SQL</span>
+        </a></li><li>
+        <a class="is-flex" href="#在Cloud-SQL中進行query">
+        <span class="has-mr-6">6.3</span>
+        <span>在Cloud SQL中進行query</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+    <div class="column-right-shadow is-hidden-widescreen ">
+        
+    </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/Group.svg" alt="使用GCP BigQuery進行基本操作" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 Jun Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv">
+                Visited by <span id="busuanzi_value_site_uv">0</span> users
+                </span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-TW");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到頁首" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="請輸入關鍵字...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
