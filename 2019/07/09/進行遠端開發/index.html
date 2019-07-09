@@ -2,25 +2,25 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Raspberry Pi建置 - Jun&#39;s Blog</title>
+<title>使用VSCode Remote透過 SSH 進行遠端開發 - Jun&#39;s Blog</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="Raspberry Pi 又稱作「樹梅派」，是一款基於 Linux 系統、只有一張信用卡大小的單板機電腦，是由英國的樹莓派基金會所開發，目的是以低價硬體及自由軟體刺激在學校的基本的電腦科學教育。Raspberry Pi 可以和螢幕、鍵盤滑鼠連結後成為一台小型電腦，和一般電腦一樣可以執行如文字圖形處理、遊戲和程式編譯等功能。">
-<meta name="keywords" content="樹梅派,Raspberry Pi">
+    <meta name="description" content="前言廢話這幾天在練習前端開發的時候看到一個Youtuber介紹了 VScode in the cloud，它是使用一個專案code-server，它可以讓你在伺服器上建立一個 VSCode環境，並讓你遠端使用瀏覽器連線進去使用，看起來極其炫泡XD，我就不多做介紹了github連結在前面可以參考一下">
+<meta name="keywords" content="VSCode,SSH">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Raspberry Pi建置">
-<meta property="og:url" content="http://yoursite.com/2016/08/20/Raspberry-Pi建置/index.html">
+<meta property="og:title" content="使用VSCode Remote透過 SSH 進行遠端開發">
+<meta property="og:url" content="http://yoursite.com/2019/07/09/進行遠端開發/index.html">
 <meta property="og:site_name" content="Jun&#39;s Blog">
-<meta property="og:description" content="Raspberry Pi 又稱作「樹梅派」，是一款基於 Linux 系統、只有一張信用卡大小的單板機電腦，是由英國的樹莓派基金會所開發，目的是以低價硬體及自由軟體刺激在學校的基本的電腦科學教育。Raspberry Pi 可以和螢幕、鍵盤滑鼠連結後成為一台小型電腦，和一般電腦一樣可以執行如文字圖形處理、遊戲和程式編譯等功能。">
+<meta property="og:description" content="前言廢話這幾天在練習前端開發的時候看到一個Youtuber介紹了 VScode in the cloud，它是使用一個專案code-server，它可以讓你在伺服器上建立一個 VSCode環境，並讓你遠端使用瀏覽器連線進去使用，看起來極其炫泡XD，我就不多做介紹了github連結在前面可以參考一下">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https://i.imgur.com/XkH1GeT.png">
-<meta property="og:updated_time" content="2019-04-15T06:43:44.822Z">
+<meta property="og:image" content="http://yoursite.com/thumb/vscode.png">
+<meta property="og:updated_time" content="2019-07-09T13:51:01.016Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Raspberry Pi建置">
-<meta name="twitter:description" content="Raspberry Pi 又稱作「樹梅派」，是一款基於 Linux 系統、只有一張信用卡大小的單板機電腦，是由英國的樹莓派基金會所開發，目的是以低價硬體及自由軟體刺激在學校的基本的電腦科學教育。Raspberry Pi 可以和螢幕、鍵盤滑鼠連結後成為一台小型電腦，和一般電腦一樣可以執行如文字圖形處理、遊戲和程式編譯等功能。">
-<meta name="twitter:image" content="https://i.imgur.com/XkH1GeT.png">
+<meta name="twitter:title" content="使用VSCode Remote透過 SSH 進行遠端開發">
+<meta name="twitter:description" content="前言廢話這幾天在練習前端開發的時候看到一個Youtuber介紹了 VScode in the cloud，它是使用一個專案code-server，它可以讓你在伺服器上建立一個 VSCode環境，並讓你遠端使用瀏覽器連線進去使用，看起來極其炫泡XD，我就不多做介紹了github連結在前面可以參考一下">
+<meta name="twitter:image" content="http://yoursite.com/thumb/vscode.png">
 
 
 
@@ -99,7 +99,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/Group.svg" alt="Raspberry Pi建置" height="28">
+                <img src="/images/Group.svg" alt="使用VSCode Remote透過 SSH 進行遠端開發" height="28">
             
             </a>
         </div>
@@ -141,29 +141,29 @@
     
     <div class="card-image">
         <span class="image is-7by1">
-            <img class="thumbnail" src="https://i.imgur.com/XkH1GeT.png" alt="Raspberry Pi建置">
+            <img class="thumbnail" src="/./thumb/vscode.png" alt="使用VSCode Remote透過 SSH 進行遠端開發">
         </span>
     </div>
     
     <div class="card-content article ">
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal" style="color:#4a648c;">
             
-            <i class="fas fa-pencil-alt">&nbsp&nbsp</i>Raspberry Pi建置
+            <i class="fas fa-pencil-alt">&nbsp&nbsp</i>使用VSCode Remote透過 SSH 進行遠端開發
             
         </h1>
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
                 <i class="far fa-calendar">&nbsp</i>
-                <time class="level-item has-text-grey" datetime="2016-08-20T06:17:33.000Z">2016-08-20</time>
+                <time class="level-item has-text-grey" datetime="2019-07-09T13:24:01.000Z">2019-07-09</time>
                 
                 <i class="far fa-calendar-check">&nbsp</i>
-                <time class="level-item has-text-grey" datetime="2019-04-15T06:43:44.822Z">2019-04-15</time>
+                <time class="level-item has-text-grey" datetime="2019-07-09T13:51:01.016Z">2019-07-09</time>
                 
                 
                 <div class="level-item">
                 <i class="fas fa-tags">&nbsp</i>
-                <a class="has-link-grey -link" href="/categories/學校/">學校</a>
+                <a class="has-link-grey -link" href="/categories/VSCode/">VSCode</a>
                 </div>
                 
                 
@@ -171,7 +171,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    12 分鐘 閱讀文 (大約 1797 個字)
+                    9 分鐘 閱讀文 (大約 1400 個字)
                 </span>
                 
                 
@@ -185,103 +185,72 @@
         
         <!-- <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Raspberry Pi建置
+                使用VSCode Remote透過 SSH 進行遠端開發
             
         </h1> -->
         <div class="content">
-            <!-- <img src="https://i.imgur.com/XkH1GeT.png" width="50%" height="50%"> -->
-<!-- ![樹梅派](){:height="10%" width="10%"} -->
-<p>Raspberry Pi 又稱作「樹梅派」，是一款基於 Linux 系統、只有一張信用卡大小的單板機電腦，是由英國的樹莓派基金會所開發，目的是以低價硬體及自由軟體刺激在學校的基本的電腦科學教育。<br>Raspberry Pi 可以和螢幕、鍵盤滑鼠連結後成為一台小型電腦，和一般電腦一樣可以執行如文字圖形處理、遊戲和程式編譯等功能。<br><a id="more"></a> </p>
-<h2 id="硬體"><a href="#硬體" class="headerlink" title="硬體"></a>硬體</h2><table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:left">Raspberry Pi3</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">SoC</td>
-<td style="text-align:left">Broadcom BCM2837（CPU，GPU DSP和SDRAM、USB）</td>
-</tr>
-<tr>
-<td style="text-align:center">CPU</td>
-<td style="text-align:left">ARM Cortex-A53 64位元 (ARMv8系列) 1.2GHz (四核心)</td>
-</tr>
-<tr>
-<td style="text-align:center">GPU</td>
-<td style="text-align:left">Broadcom VideoCore IV[43], OpenGL ES 2.0, 1080p 30 h.264/MPEG-4 AVC高畫質解碼器</td>
-</tr>
-<tr>
-<td style="text-align:center">記憶體</td>
-<td style="text-align:left">1024 MB (LPDDR2)</td>
-</tr>
-<tr>
-<td style="text-align:center">影像輸出</td>
-<td style="text-align:left">畫面用RCA端子（PAL &amp; NTSC）、HDMI，HDMI介面可使用14種解析度，分別從640×350到1920×1200之間</td>
-</tr>
-<tr>
-<td style="text-align:center">板載儲存</td>
-<td style="text-align:left">MicroSD卡插槽</td>
-</tr>
-<tr>
-<td style="text-align:center">網路介面</td>
-<td style="text-align:left">10/100Mbps 乙太網介面（RJ45介面），支援802.11n無線網路及藍牙4.1</td>
-</tr>
-</tbody>
-</table>
-<h2 id="軟體"><a href="#軟體" class="headerlink" title="軟體"></a>軟體</h2><p>Raspberry Pi作為一款ARM微型電腦板(Single-board computer)，就離不開安裝作業系統(OS)，樹莓派基金會(Raspberry Pi Foundation)提供了數款Linux系統給大家安裝，以下介紹幾款常用的作業系統。</p>
-<h3 id="Raspbian-官方建議"><a href="#Raspbian-官方建議" class="headerlink" title="Raspbian (官方建議)"></a><a href="https://www.raspbian.org/" target="_blank" rel="noopener">Raspbian</a> (官方建議)</h3><p>這是衍生自 Debian 的發行版，也是目前 Raspberry Pi 的主要發行版，初學者或是 Linux 新手強烈推薦使用這一套，支援多、資料多。</p>
-<h3 id="Ubuntu-Mate"><a href="#Ubuntu-Mate" class="headerlink" title="Ubuntu Mate"></a><a href="https://ubuntu-mate.org/raspberry-pi/" target="_blank" rel="noopener">Ubuntu Mate</a></h3><p>在 Debain 家族裡，Ubuntu 算是能見度最高的一個，而這套是 Ubuntu 官方維護的發行版。</p>
-<h3 id="RISC-OS"><a href="#RISC-OS" class="headerlink" title="RISC OS"></a><a href="https://www.riscosopen.org/content/downloads/raspberry-pi" target="_blank" rel="noopener">RISC OS</a></h3><p>從名稱就知道，這是一套專為 RISC 架構所開發的發行版，開發團隊就是 ARM 原廠，所以在 ARM Base CPU 上當然有最好的效果。</p>
-<h3 id="Snappy-Ubuntu-Core"><a href="#Snappy-Ubuntu-Core" class="headerlink" title="Snappy Ubuntu Core"></a><a href="https://developer.ubuntu.com/en/snappy/start/#snappy-raspi2" target="_blank" rel="noopener">Snappy Ubuntu Core</a></h3><p>Ubuntu 官方的說法是，這是一套極小的伺服器等級發行版，使用跟 PC 相同的函數庫，但是應用程式部份是使用另一種更簡單的運作機制來維護，讓系統兼顧可靠、安全、易用等特性。</p>
-<h3 id="Raspbian-LITE"><a href="#Raspbian-LITE" class="headerlink" title="Raspbian LITE"></a><a href="https://www.raspberrypi.org/downloads/raspbian/" target="_blank" rel="noopener">Raspbian LITE</a></h3><p>和Raspbian主要分別在於 Jessie Lite 沒有預設安裝 X-server 與相關的套件，因此無法用 startx 啟動視窗管理員。因為也沒有安裝 Qt 和 GTK+ 的函式庫，因此也無法執行相關的視窗程式。主要作為伺服器用途</p>
-<hr>
-<h2 id="安裝作業系統到樹梅派"><a href="#安裝作業系統到樹梅派" class="headerlink" title="安裝作業系統到樹梅派"></a>安裝作業系統到樹梅派</h2><p>需要工具:<br>MicroSD讀卡機</p>
+            <h2 id="前言廢話"><a href="#前言廢話" class="headerlink" title="前言廢話"></a>前言廢話</h2><p>這幾天在練習前端開發的時候看到一個Youtuber介紹了 <a href="https://www.youtube.com/watch?v=9Emn2YQNDl0" target="_blank" rel="noopener">VScode in the cloud</a>，它是使用一個專案<a href="https://github.com/cdr/code-server" target="_blank" rel="noopener">code-server</a>，它可以讓你在伺服器上建立一個 VSCode環境，並讓你遠端使用瀏覽器連線進去使用，看起來極其炫泡XD，我就不多做介紹了github連結在前面可以參考一下<br><a id="more"></a><br><img src="https://github.com/cdr/code-server/raw/master/doc/assets/ide.png" alt="code-server"></p>
+<p>但是思考跟爬文了一下，感覺蠻吃資源以及看到有人反應開啟較大的檔案的時候就會奇卡無比，期待這個專案能夠在繼續優化。</p>
+<p>後來就繼續找了一下其他Remote的解決方案，原來在今年5月 PyCon 2019 大會上，微軟發布了 <a href="https://code.visualstudio.com/docs/remote/remote-overview" target="_blank" rel="noopener">VSCode Remote</a> 的VSCode套件，並且在6月更新的版本中正式發布，終於支援遠端開發啦!!!<br>此次微軟提供了三種遠端連線方法</p>
+<ul>
+<li>SSH 連接到實體/虛擬Linux主機(目前只提供給x86_64)</li>
+<li>連接Container</li>
+<li>連接WSL</li>
+</ul>
+<p><img src="https://code.visualstudio.com/assets/docs/remote/ssh/architecture-ssh.png" alt="SSH連線"></p>
+<p>那麼我們就來試試看其中的使用SSH遠端連線到主機進行開發吧!</p>
+<h2 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h2><h3 id="安裝VSCode以及擴充插件"><a href="#安裝VSCode以及擴充插件" class="headerlink" title="安裝VSCode以及擴充插件"></a>安裝VSCode以及擴充插件</h3><p>當然首先要安裝VSCode啦<br>接著在Extension搜尋remote就可以看到了，這邊我們選擇安裝SSH的</p>
+<p><img src="https://i.imgur.com/fpVzILp.png" alt></p>
+<p>安裝完成後我們就可以看到在左側新增了一個新的Remote欄位</p>
+<p><img src="https://i.imgur.com/2wmpEbn.png" alt></p>
+<h3 id="安裝SSH-client"><a href="#安裝SSH-client" class="headerlink" title="安裝SSH client"></a>安裝SSH client</h3><p><strong>在本機端的部分因為要使用SSH所以也必須安裝作業系統對應的SSH客戶端哦</strong><br>因為我是用Windows系統，微軟這邊提供安裝 <a href="https://docs.microsoft.com/zh-tw/windows-server/administration/openssh/openssh_install_firstuse" target="_blank" rel="noopener">OpenSSH</a> 請參考裡面的說明ㄅ</p>
+<h2 id="設定"><a href="#設定" class="headerlink" title="設定"></a>設定</h2><h3 id="VSCode設定"><a href="#VSCode設定" class="headerlink" title="VSCode設定"></a>VSCode設定</h3><p>首先呢先到VScode的設定 <code>設定&gt;延伸模組&gt;Remote-SSH</code> 中將 <code>Remote.SSH: Show Login Terminal</code> 打開</p>
+<p><img src="https://i.imgur.com/TLE4hAc.png" alt></p>
+<h3 id="SSH設定"><a href="#SSH設定" class="headerlink" title="SSH設定"></a>SSH設定</h3><p>遠端開發插件提供我們使用Pubkey和密碼的方式進行連接，不過如果使用密碼，每次都需要手動輸入密碼，不太方便。所以這裡介绍使用Pubkey的方式進行遠端連線。我們首先要做的事情當然就是設定SSH Pubkey啦，必須將我們本地端Pubkey（id_rsa.pub）加入到SSH主機上相應的 <code>authorized_keys</code> 檔案中。</p>
+<h4 id="生成Pubkey並加入遠端主機中"><a href="#生成Pubkey並加入遠端主機中" class="headerlink" title="生成Pubkey並加入遠端主機中"></a>生成Pubkey並加入遠端主機中</h4><p>檢查本機上是否已有SSH密鑰。Pubkey通常在Windows上的 <code>%USERPROFILE%\.ssh\id_rsa.pub</code> 中。<br>如果沒有密鑰，請在本機的command line運行以下命令來生成SSH密鑰</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096</span><br></pre></td></tr></table></figure>
+<p>產生後就可以在資料夾中看到下列檔案</p>
+<p><img src="https://i.imgur.com/Dy3yxyb.png" alt></p>
+<p>config檔案是Remote-SSH的設定文件，表示等下我們使用這個資料夾下的rsa密鑰去連線遠端伺服器。後面會設定這個部分</p>
+<p>接著我們要將生成的Pubkey加入到遠端主機中 <code>~/.ssh/authorized_keys</code> 的檔案內，如果沒有的話請自行創建此資料夾與檔案</p>
 <ol>
-<li>首先要將作業系統放到SD卡裡，先用讀卡機將SD卡連結到電腦中</li>
-<li><p>要先將MicroSD卡先格式化，這邊推薦使用SD卡官方的格式化工具<a href="https://www.sdcard.org/cht/downloads/formatter_4/" target="_blank" rel="noopener">SD Formatter</a><br>電腦讀取到SD卡後，開啟SD Formatter 確認Drive是你的SD卡磁碟代號<br><img src="https://i.imgur.com/ILPuO0q.png" alt="格式化"></p>
+<li><p>Create the .ssh directory:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.ssh</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>格式化完了之後到Raspberry Pi官網下載作業系統，下載<a href="https://www.raspberrypi.org/downloads/raspbian/" target="_blank" rel="noopener">Raspbian</a></p>
+<li><p>Set the right permissions:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 700 ~/.ssh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Create the authorized_keys file:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Set the right permissions:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 600 ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p><img src="https://i.imgur.com/kH9s4uT.png" alt="RASPBIAN"></p>
-<ol start="4">
-<li><p>下載下來解壓縮之後會得到一個 <strong>.img</strong> 的映像檔<br><img src="https://i.imgur.com/EBsPrMV.png" alt="img"><br>然後下載<a href="https://sourceforge.net/projects/win32diskimager/" target="_blank" rel="noopener">Win32DiskImager</a>，這是一個映像檔燒錄工具，能夠把作業系統的映像檔燒錄到你的SD卡裡。<br>安裝完成後選擇剛剛下載的Raspbian的img檔，然後指定你的SD卡的硬碟代號<strong>注意要燒錄的磁碟代號是否為你的SD卡</strong>，點擊<strong>Write</strong>，將系統抄到SD卡上。<br><img src="https://i.imgur.com/bbF0FmV.png" alt="燒綠"><br>燒錄成功<br><img src="https://i.imgur.com/80Gus6O.png" alt="燒錄成功"><br>win10若是燒錄失敗，對著Win32DiskImager程式右鍵&gt;內容&gt;相容性<br>勾選<strong>以相容模式執行這個程式</strong>選擇<strong>win7</strong><br><img src="https://i.imgur.com/JKPpYRl.png" alt="相容性"></p>
-</li>
-<li><p>燒錄成功後就可以將SD卡取出插到Raspberry Pi上，接上螢幕(HDMI)和鍵盤滑鼠</p>
-</li>
+<p>創建好了之後就把你本機端的 <code>id_rsa.pub</code> 的內容複製到伺服器端的 <code>authorized_keys</code> 檔案中<br>這邊SSH設定就完成啦~</p>
+<h3 id="VSCode設定文件"><a href="#VSCode設定文件" class="headerlink" title="VSCode設定文件"></a>VSCode設定文件</h3><p>接著我們來設定剛剛提到的config文件<br>在VSCode中輸入快捷鍵 <code>Ctrl+Shift+P</code> 開啟命令列輸入remote，選擇 <code>Remote-SSH: Open Configuration File</code> 選項<br><img src="https://i.imgur.com/EfW6q1u.png" alt></p>
+<p>接著會跳出<br><img src="https://i.imgur.com/EIFxy0Y.png" alt><br>選擇剛剛Pubkey路徑下的config檔案，開啟後輸入<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host LabServer             #填寫別名例如 LabSever</span><br><span class="line">    HostName 172.31.00.00  #主機名稱或是ip位置</span><br><span class="line">    User root              #登入的使用者名稱</span><br><span class="line">    Port                   #如果有指定的Port號</span><br></pre></td></tr></table></figure></p>
+<p>儲存後完成設定</p>
+<h2 id="連線"><a href="#連線" class="headerlink" title="連線"></a>連線</h2><p>設定完成後點擊左邊的Remote-SSH圖案，connection下就會有剛剛設定好的遠端主機，點擊右邊的已新視窗開啟</p>
+<p><img src="https://i.imgur.com/QsOcKuW.png" alt></p>
+<p>如果沒設定沒問題的話就會跳出新視窗進行連線了<br>會在右下角顯示目前的連接狀況</p>
+<p><img src="https://i.imgur.com/WbMAN39.png" alt></p>
+<p>連接完成左下角會顯示目前連線的主機</p>
+<p><img src="https://i.imgur.com/VPxDBU7.png" alt></p>
+<div style="background-color:#fff3cd;  border-radius: 10px; padding:12px 20px; color: #856404; border-color: #ffeeba;">此終端機會一直顯示這樣的狀況，不用擔心 <br> 可以由旁邊的下拉選單選擇bash來輸入指令</div>
+
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>成功連上之後就可以開始進行遠端開發啦~<br>左側點選到檔案總管&gt;開啟資料夾</p>
+<p><img src="https://i.imgur.com/zNeBIkY.png" alt></p>
+<p>就可以看到遠端機器上的檔案了，選擇做為開發的資料夾進行開啟就可以使用啦!</p>
+<p><img src="https://i.imgur.com/pth6YES.png" alt></p>
+<div style="background-color:#fff3cd;  border-radius: 10px; padding:12px 20px; color: #856404; border-color: #ffeeba;">以上，上面的設定皆是在我的主機配置狀況下可以正常運行，如果各位在設定過程中出現問題請參考google大神或是下面的參考連結3的官方文件。</div>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><ol>
+<li><a href="https://docs.microsoft.com/zh-tw/windows-server/administration/openssh/openssh_install_firstuse" target="_blank" rel="noopener">Win10 OpenSSH安裝</a></li>
+<li><a href="https://askubuntu.com/questions/466549/bash-home-user-ssh-authorized-keys-no-such-file-or-directory" target="_blank" rel="noopener">遠端機器建立authorized_keys檔案</a></li>
+<li><a href="https://code.visualstudio.com/docs/remote/ssh" target="_blank" rel="noopener">VSCode SSH Remote設定</a></li>
 </ol>
-<ul>
-<li><strong>若是使用HDMI轉VGA在取出SD卡前必須先修改燒錄後資料夾中Config.txt這個檔案</strong><br>修改其中內容<br><img src="https://i.imgur.com/m5Am37u.png" alt></li>
-</ul>
-<p>#uncomment if hdmi display is not detected and composite is being output<br><strong><font color="red">hdmi_force_hotplug=1</font></strong></p>
-<p>#uncomment to force a specific HDMI mode (this will force VGA)<br><strong><font color="red">hdmi_group=2</font></strong><br><strong><font color="red">hdmi_mode=16</font></strong></p>
-<p>#uncomment to force a HDMI mode rather than DVI. This can make audio work in</p>
-<p>#DMT (computer monitor) modes<br><strong><font color="red">hdmi_drive=2</font></strong><br>將以上四行刪去註解</p>
-<ul>
-<li><strong>hdmi_force_hotplug=1:</strong> 設定為強制從HDMI輸出。<br>輸出Raspberry Pi的視訊輸出有RCA端子與HDMI。系統預設從RCA端子輸出，如果偵測到有接HDMI，就會從HDMI輸出。但因為使用轉接頭或轉接線，Raspberry Pi可能無法正常偵測到HDMI，於是以RCA端子輸出視訊，導致沒畫面。</li>
-<li><strong>hdmi_group</strong>：用來指定要使用 CEA 或 DMT 的格式設定解析度。</li>
-<li><strong>hdmi_mode</strong>： hdmi_mode=16 時，表示使用 1024x768 60 Hz 的解析度。</li>
-<li><strong>hdmi_drive</strong>：設定要驅動 DVI (1) 還是 HDMI (2)，必須使用 HDMI ，也就是設定為 2 才會有聲音。<br>而<strong>hdmi_mode</strong>這個參數與解析度對照如下表(點圖放大)<br><img src="https://i.imgur.com/y14n3hR.png =480x590" alt="參數對照表"></li>
-</ul>
-<ol start="6">
-<li>Raspberry Pi沒有電源開關，只要接上電源，就會直接啟動</li>
-</ol>
-<h2 id="系統內設定"><a href="#系統內設定" class="headerlink" title="系統內設定"></a>系統內設定</h2><p>進入系統畫面之後，接下來要進行內部設定<br>打開terminal 輸入 raspi-config開始進行設定，使用空白鍵選擇以及取消<br>重要的設定有<br>1 Expand Filesystemㄣ</p>
-<p>系統預設會先分割出一個 FAT32 格式 64MB 大小的分割區用來開機，而剩餘的空間必須執行這個選項來建立分割區才可使用。</p>
-<p>2 Change User Password</p>
-<p>變更預設使用者「pi」的密碼，未修改之前的預設密碼是「raspberry」。</p>
-<p>5 Internationalisation Options</p>
-<p>裡面有 3 個子選項，用來修改語系、時區及鍵盤排列。 </p>
-<ul>
-<li>修改語系: 建議取消預設的「en_GB.UTF8」，選擇「en_US.UTF8」，想要讓系統訊息用中文顯示，選擇「zh_TW.UTF8」</li>
-<li>修改時區:  因為Raspberry Pi沒有內建實時時鍾，它並不會自動儲存時間，需要依靠連接到網絡的時間伺服器下載資料，所以我們需要為Raspberry Pi指定地點，從而得到準確的時間，如下圖選擇 4 Internationalisation Options &gt; I2 Change Timezone，進入地區設定頁 ，選擇自己位處的地點。</li>
-<li>修改鍵盤排列: 因為Raspberry Pi預設為英式鍵盤排列，必須修改為美式鍵盤以符合我們的按鍵</li>
-</ul>
-<p>設定完成後重新開機</p>
-<p><font color="red"><strong>如果設定為中文介面後無法正常顯示，顯示為亂碼，可能是沒有中文字型庫</strong></font><br>輸入以下指令安裝文泉驛正黑體<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install ttf-wqy-zenhei</span><br></pre></td></tr></table></figure></p>
-<p>安裝完成後重新開機</p>
 
         </div>
         
@@ -289,7 +258,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/Raspberry-Pi/">Raspberry Pi</a>, <a class="has-link-grey -link" href="/tags/樹梅派/">樹梅派</a>
+                    <a class="has-link-grey -link" href="/tags/SSH/">SSH</a>, <a class="has-link-grey -link" href="/tags/VSCode/">VSCode</a>
                 </div>
             </div>
         </div>
@@ -306,13 +275,13 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/04/16/SQL面試作業紀錄/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">SQL面試作業紀錄</span>
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/05/08/使用GCP BigQuery進行資料分析/">
+                <span class="level-item">使用GCP BigQuery進行基本操作</span>
+                <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
-        
         
     </div>
 </div>
@@ -325,8 +294,8 @@
         
 <script>
     var disqus_config = function () {
-        this.page.url = 'http://yoursite.com/2016/08/20/Raspberry-Pi建置/';
-        this.page.identifier = '2016/08/20/Raspberry-Pi建置/';
+        this.page.url = 'http://yoursite.com/2019/07/09/進行遠端開發/';
+        this.page.identifier = '2019/07/09/進行遠端開發/';
     };
     (function() {
         var d = document, s = d.createElement('script');  
@@ -464,41 +433,53 @@
                 文章目錄
             </h3>
             <ul class="menu-list"><li>
-        <a class="is-flex" href="#硬體">
+        <a class="is-flex" href="#前言廢話">
         <span class="has-mr-6">1</span>
-        <span>硬體</span>
+        <span>前言廢話</span>
         </a></li><li>
-        <a class="is-flex" href="#軟體">
+        <a class="is-flex" href="#安裝">
         <span class="has-mr-6">2</span>
-        <span>軟體</span>
+        <span>安裝</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#Raspbian-官方建議">
+        <a class="is-flex" href="#安裝VSCode以及擴充插件">
         <span class="has-mr-6">2.1</span>
-        <span>Raspbian (官方建議)</span>
+        <span>安裝VSCode以及擴充插件</span>
         </a></li><li>
-        <a class="is-flex" href="#Ubuntu-Mate">
+        <a class="is-flex" href="#安裝SSH-client">
         <span class="has-mr-6">2.2</span>
-        <span>Ubuntu Mate</span>
-        </a></li><li>
-        <a class="is-flex" href="#RISC-OS">
-        <span class="has-mr-6">2.3</span>
-        <span>RISC OS</span>
-        </a></li><li>
-        <a class="is-flex" href="#Snappy-Ubuntu-Core">
-        <span class="has-mr-6">2.4</span>
-        <span>Snappy Ubuntu Core</span>
-        </a></li><li>
-        <a class="is-flex" href="#Raspbian-LITE">
-        <span class="has-mr-6">2.5</span>
-        <span>Raspbian LITE</span>
+        <span>安裝SSH client</span>
         </a></li></ul></li><li>
-        <a class="is-flex" href="#安裝作業系統到樹梅派">
+        <a class="is-flex" href="#設定">
         <span class="has-mr-6">3</span>
-        <span>安裝作業系統到樹梅派</span>
+        <span>設定</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#VSCode設定">
+        <span class="has-mr-6">3.1</span>
+        <span>VSCode設定</span>
         </a></li><li>
-        <a class="is-flex" href="#系統內設定">
+        <a class="is-flex" href="#SSH設定">
+        <span class="has-mr-6">3.2</span>
+        <span>SSH設定</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#生成Pubkey並加入遠端主機中">
+        <span class="has-mr-6">3.2.1</span>
+        <span>生成Pubkey並加入遠端主機中</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#VSCode設定文件">
+        <span class="has-mr-6">3.3</span>
+        <span>VSCode設定文件</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#連線">
         <span class="has-mr-6">4</span>
-        <span>系統內設定</span>
+        <span>連線</span>
+        </a></li><li>
+        <a class="is-flex" href="#使用">
+        <span class="has-mr-6">5</span>
+        <span>使用</span>
+        </a></li><li>
+        <a class="is-flex" href="#參考連結">
+        <span class="has-mr-6">6</span>
+        <span>參考連結</span>
         </a></li></ul>
         </div>
     </div>
@@ -522,7 +503,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/Group.svg" alt="Raspberry Pi建置" height="28">
+                    <img src="/images/Group.svg" alt="使用VSCode Remote透過 SSH 進行遠端開發" height="28">
                 
                 </a>
                 <p class="is-size-7">
